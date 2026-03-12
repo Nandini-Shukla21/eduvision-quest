@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTheme } from "@/components/ThemeProvider";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { isAuthenticated } from "@/lib/auth";
+import foxyMascot from "@/assets/foxy-mascot.png";
 
 const LandingNavbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -18,7 +19,7 @@ const LandingNavbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
         <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold">
-          <span className="text-2xl">🧠</span>
+          <img src={foxyMascot} alt="Foxy" className="w-8 h-8" />
           <span className="text-gradient">EduVision AI</span>
         </Link>
 

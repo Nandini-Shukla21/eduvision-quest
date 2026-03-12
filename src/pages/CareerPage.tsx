@@ -1,158 +1,137 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import careerData from "@/data/careerData.json";
-import { ChevronRight, CheckCircle, BookOpen } from "lucide-react";
+import { TrendingUp, BookOpen, Target, User, Compass } from "lucide-react";
 
-type CareerKey = "data" | "engineering" | "design" | "research";
+const iconMap: Record<string, any> = { TrendingUp, BookOpen, Target, User };
+
+type CareerKey = keyof typeof careerData.careers;
+
+const allCareers = Object.entries(careerData.careers) as [CareerKey, typeof careerData.careers[CareerKey]][];
 
 const CareerPage = () => {
-  const [step, setStep] = useState<"quiz" | "skills" | "result">("quiz");
-  const [currentQ, setCurrentQ] = useState(0);
-  const [tags, setTags] = useState<string[]>([]);
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
-  const [resultKey, setResultKey] = useState<CareerKey | null>(null);
-
-  const questions = careerData.interestQuestions;
-
-  const selectOption = (optTags: string[]) => {
-    const newTags = [...tags, ...optTags];
-    setTags(newTags);
-    if (currentQ + 1 < questions.length) {
-      setCurrentQ(currentQ + 1);
-    } else {
-      setStep("skills");
-    }
-  };
-
-  const toggleSkill = (skill: string) => {
-    setSelectedSkills((prev) =>
-      prev.includes(skill) ? prev.filter((s) => s !== skill) : [...prev, skill]
-    );
-  };
-
-  const getResult = () => {
-    const counts: Record<string, number> = {};
-    tags.forEach((t) => { counts[t] = (counts[t] || 0) + 1; });
-    const winner = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0] as CareerKey;
-    setResultKey(winner);
-    setStep("result");
-  };
-
-  const reset = () => { setStep("quiz"); setCurrentQ(0); setTags([]); setSelectedSkills([]); setResultKey(null); };
-
-  if (step === "result" && resultKey) {
-    const career = careerData.careers[resultKey];
-    return (
-      <div className="max-w-2xl mx-auto">
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="glass-card rounded-3xl p-8">
-          <div className="text-center mb-6">
-            <span className="text-5xl">{career.emoji}</span>
-            <h2 className="font-display text-2xl font-bold mt-3">Recommended Career</h2>
-            <h3 className="font-display text-xl font-semibold text-primary mt-1">{career.title}</h3>
-            <p className="text-muted-foreground text-sm mt-2">{career.description}</p>
-          </div>
-
-          <div className="mb-6">
-            <h4 className="font-display font-semibold text-sm mb-2 text-muted-foreground">SKILLS REQUIRED</h4>
-            <div className="flex flex-wrap gap-2">
-              {career.skills.map((s) => (
-                <span key={s} className="px-3 py-1.5 rounded-full bg-primary/15 text-sm font-medium">{s}</span>
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <h4 className="font-display font-semibold text-sm mb-3 text-muted-foreground">LEARNING PATH</h4>
-            <div className="space-y-2">
-              {career.learningPath.map((step, i) => (
-                <motion.div key={i} initial={{ x: -10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: i * 0.1 }}
-                  className="flex items-center gap-3 p-3 bg-muted/50 rounded-xl text-sm"
-                >
-                  <div className="w-7 h-7 rounded-full gradient-primary flex items-center justify-center text-xs font-bold shrink-0">{i + 1}</div>
-                  {step}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <h4 className="font-display font-semibold text-sm mb-2 text-muted-foreground">RECOMMENDED COURSES</h4>
-            <div className="space-y-2">
-              {career.courses.map((c) => (
-                <div key={c} className="flex items-center gap-2 p-3 bg-accent/30 rounded-xl text-sm">
-                  <BookOpen className="w-4 h-4 text-primary shrink-0" /> {c}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <button onClick={reset} className="w-full py-2.5 rounded-xl gradient-primary font-semibold hover-lift">Retake Quiz</button>
-        </motion.div>
-      </div>
-    );
-  }
-
-  if (step === "skills") {
-    return (
-      <div className="max-w-2xl mx-auto">
-        <h1 className="font-display text-2xl font-bold mb-2">🎯 Select Your Skills</h1>
-        <p className="text-muted-foreground mb-6">Choose skills that match your strengths.</p>
-        <div className="glass-card rounded-2xl p-6">
-          <div className="flex flex-wrap gap-3 mb-6">
-            {careerData.skills.map((skill) => (
-              <button key={skill} onClick={() => toggleSkill(skill)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all ${
-                  selectedSkills.includes(skill) ? "gradient-primary border-transparent" : "bg-muted/50 border-border/50 hover:border-primary/30"
-                }`}
-              >
-                {selectedSkills.includes(skill) && <CheckCircle className="w-3.5 h-3.5 inline mr-1.5" />}
-                {skill}
-              </button>
-            ))}
-          </div>
-          <button onClick={getResult} disabled={selectedSkills.length === 0}
-            className="w-full py-2.5 rounded-xl gradient-primary font-semibold hover-lift disabled:opacity-50"
-          >
-            Get Career Recommendation
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const q = questions[currentQ];
+  const [selected, setSelected] = useState<CareerKey>("data");
+  const career = careerData.careers[selected];
+  const IconComponent = iconMap[career.icon] || TrendingUp;
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="font-display text-2xl font-bold mb-2">🧭 Career Recommendation</h1>
-      <p className="text-muted-foreground mb-6">Discover your ideal career path.</p>
-
-      <div className="mb-6">
-        <div className="flex items-center justify-between text-sm mb-2">
-          <span>Question {currentQ + 1} of {questions.length}</span>
+    <div className="max-w-6xl space-y-8">
+      {/* Header */}
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
+            <Compass className="w-5 h-5" />
+          </div>
+          <div>
+            <h1 className="font-display text-2xl md:text-3xl font-bold">Career Path Guidance</h1>
+            <p className="text-muted-foreground text-sm">Explore career paths tailored to your skills and interests</p>
+          </div>
         </div>
-        <div className="w-full h-2.5 bg-muted rounded-full overflow-hidden">
-          <motion.div animate={{ width: `${(currentQ / questions.length) * 100}%` }} className="h-full gradient-primary rounded-full" />
+      </motion.div>
+
+      {/* Featured Career Card */}
+      <motion.div
+        key={selected}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="glass-card rounded-2xl p-8 bg-secondary/30"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <IconComponent className="w-7 h-7 text-primary" />
+          <h2 className="font-display text-2xl font-bold">{career.title}</h2>
+        </div>
+        <p className="text-muted-foreground mb-6">{career.description}</p>
+
+        <div className="grid grid-cols-3 gap-6 mb-8">
+          <div>
+            <p className="text-sm text-muted-foreground">Salary Range</p>
+            <p className="font-display text-xl font-bold">{career.salary}</p>
+          </div>
+          <div>
+            <p className="text-sm text-muted-foreground">Job Growth</p>
+            <p className="font-display text-xl font-bold text-primary">{career.growth}</p>
+          </div>
+          <div>
+            <p className="text-sm text-muted-foreground">Demand</p>
+            <div className="flex gap-1 mt-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-5 h-6 rounded-sm ${i < career.demand ? "bg-foreground" : "bg-muted"}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p className="text-sm text-muted-foreground mb-3">Key Skills Required:</p>
+          <div className="flex flex-wrap gap-2">
+            {career.skills.map((s) => (
+              <span key={s} className="px-4 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-sm font-medium">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Other Career Paths */}
+      <div>
+        <h3 className="font-display text-xl font-bold mb-4">Other Career Paths</h3>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {allCareers.map(([key, c]) => {
+            const Icon = iconMap[c.icon] || TrendingUp;
+            return (
+              <motion.button
+                key={key}
+                whileHover={{ y: -3 }}
+                onClick={() => setSelected(key)}
+                className={`glass-card rounded-2xl p-5 text-left transition-all ${
+                  selected === key ? "ring-2 ring-primary" : "hover:shadow-lg"
+                }`}
+              >
+                <Icon className="w-6 h-6 mb-3 text-primary" />
+                <p className="font-display font-bold">{c.title}</p>
+                <p className="text-sm text-primary mt-1">{c.salary}</p>
+              </motion.button>
+            );
+          })}
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div key={currentQ} initial={{ x: 30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -30, opacity: 0 }}
-          className="glass-card rounded-2xl p-6"
-        >
-          <h2 className="font-display text-lg font-semibold mb-4">{q.question}</h2>
-          <div className="space-y-3">
-            {q.options.map((opt) => (
-              <button key={opt.text} onClick={() => selectOption(opt.tags)}
-                className="w-full text-left p-4 rounded-xl bg-muted/50 hover:bg-primary/20 border border-transparent hover:border-primary/30 transition-all flex items-center justify-between group"
-              >
-                <span className="text-sm">{opt.text}</span>
-                <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
-              </button>
-            ))}
-          </div>
-        </motion.div>
-      </AnimatePresence>
+      {/* Learning Path Roadmap */}
+      <motion.div
+        key={`path-${selected}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="glass-card rounded-2xl p-8"
+      >
+        <h3 className="font-display text-xl font-bold mb-6">Recommended Learning Path:</h3>
+        <div className="space-y-0">
+          {career.learningPath.map((step, i) => (
+            <div key={i} className="flex gap-5">
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 rounded-xl bg-foreground text-background flex items-center justify-center font-display font-bold shrink-0">
+                  {step.step}
+                </div>
+                {i < career.learningPath.length - 1 && (
+                  <div className="w-0.5 h-12 bg-border" />
+                )}
+              </div>
+              <div className="pb-8">
+                <p className="text-sm text-primary">{step.duration}</p>
+                <p className="font-display font-bold">{step.title}</p>
+                <p className="text-sm text-muted-foreground">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button className="w-full py-3 rounded-xl bg-foreground text-background font-semibold hover-lift mt-4">
+          Get Personalized Roadmap
+        </button>
+      </motion.div>
     </div>
   );
 };

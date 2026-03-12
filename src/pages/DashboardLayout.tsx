@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/components/ThemeProvider";
 import { getCurrentUser, logout } from "@/lib/auth";
+import foxyMascot from "@/assets/foxy-mascot.png";
 import {
   LayoutDashboard, Brain, BookOpen, BarChart3, Compass, Layers,
   User, LogOut, Menu, X, Moon, Sun, ChevronLeft
@@ -10,11 +11,10 @@ import {
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-  { icon: Brain, label: "Learning Style", path: "/dashboard/learning-style" },
+  { icon: Brain, label: "Learning Style Quiz", path: "/dashboard/learning-style" },
   { icon: BookOpen, label: "Summarizer", path: "/dashboard/summarizer" },
+  { icon: Compass, label: "Career Path", path: "/dashboard/career" },
   { icon: BarChart3, label: "Analytics", path: "/dashboard/analytics" },
-  { icon: Compass, label: "Career Guide", path: "/dashboard/career" },
-  { icon: Layers, label: "Flashcards", path: "/dashboard/flashcards" },
   { icon: User, label: "Profile", path: "/dashboard/profile" },
 ];
 
@@ -31,7 +31,7 @@ const DashboardLayout = () => {
   const NavContent = () => (
     <div className="flex flex-col h-full">
       <div className="p-4 flex items-center gap-2">
-        <span className="text-2xl">🧠</span>
+        <img src={foxyMascot} alt="Foxy" className="w-8 h-8 shrink-0" />
         {!collapsed && <span className="font-display font-bold text-lg">EduVision AI</span>}
       </div>
 

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import LandingNavbar from "@/components/LandingNavbar";
+import FoxyWelcome from "@/components/FoxyWelcome";
+import foxyMascot from "@/assets/foxy-mascot.png";
 import { BookOpen, Brain, BarChart3, Compass, Sparkles, Zap, Target, GraduationCap, ArrowRight, Twitter, Linkedin, Github, Mail } from "lucide-react";
 import { isAuthenticated } from "@/lib/auth";
 
@@ -33,6 +35,7 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen">
       <LandingNavbar />
+      <FoxyWelcome />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
@@ -41,53 +44,83 @@ const LandingPage = () => {
         <div className="absolute bottom-20 right-10 w-72 h-72 bg-accent/30 rounded-full blur-3xl animate-float-slow" />
         <div className="absolute top-40 right-1/4 w-20 h-20 bg-rose/30 rounded-full blur-2xl animate-float" />
 
-        <div className="relative container mx-auto px-4 py-24 md:py-36 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/60 text-sm font-medium mb-6">
-              <Sparkles className="w-4 h-4" /> AI-Powered Learning Platform
-            </span>
-          </motion.div>
+        <div className="relative container mx-auto px-4 py-20 md:py-32">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left */}
+            <div>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/60 text-sm font-medium mb-6">
+                  <Sparkles className="w-4 h-4" /> AI-Powered Learning Platform
+                </span>
+              </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-4xl mx-auto"
-          >
-            Learn Smarter with{" "}
-            <span className="text-gradient">AI-Powered</span> Education
-          </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+              >
+                Learn Smarter with{" "}
+                <span className="text-gradient">EduVision AI</span>
+              </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mt-6 text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
-          >
-            Discover your unique learning style, generate instant study summaries,
-            track your academic performance, and receive personalized career
-            recommendations — all powered by intelligent AI tools.
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mt-6 text-muted-foreground text-lg leading-relaxed"
+              >
+                AI-powered personalized learning and career guidance for students.
+                Discover your learning style, generate summaries, and track your growth.
+              </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link to={loggedIn ? "/dashboard" : "/signup"} className="px-8 py-3.5 rounded-2xl gradient-primary font-semibold hover-lift inline-flex items-center gap-2">
-              Get Started <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link to="/login" className="px-8 py-3.5 rounded-2xl glass-card font-semibold hover-lift">
-              Log In to Dashboard
-            </Link>
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="mt-8 flex flex-col sm:flex-row gap-4"
+              >
+                <Link to={loggedIn ? "/dashboard" : "/signup"} className="px-8 py-3.5 rounded-2xl gradient-primary font-semibold hover-lift inline-flex items-center gap-2">
+                  Start Learning <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link to={loggedIn ? "/dashboard" : "/login"} className="px-8 py-3.5 rounded-2xl glass-card font-semibold hover-lift">
+                  Explore Dashboard
+                </Link>
+              </motion.div>
+            </div>
 
-          {/* Floating elements */}
-          <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute top-32 left-[10%] text-4xl hidden lg:block">📚</motion.div>
-          <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute top-48 right-[15%] text-4xl hidden lg:block">🧠</motion.div>
-          <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3.5, repeat: Infinity }} className="absolute bottom-20 left-[20%] text-3xl hidden lg:block">⭐</motion.div>
-          <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-32 right-[25%] text-3xl hidden lg:block">🎓</motion.div>
+            {/* Right - Foxy */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+              className="relative flex justify-center"
+            >
+              <motion.img
+                src={foxyMascot}
+                alt="Foxy - AI Learning Companion"
+                className="w-64 md:w-80 lg:w-96 drop-shadow-2xl"
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+              {/* Speech bubble */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8, type: "spring" }}
+                className="absolute -top-4 right-0 md:right-4 glass-card-strong rounded-2xl rounded-br-sm px-5 py-3 max-w-[200px]"
+              >
+                <p className="text-sm font-medium">Hi! I'm Foxy 🦊</p>
+                <p className="text-xs text-muted-foreground">Your AI learning companion.</p>
+              </motion.div>
+
+              {/* Floating elements around Foxy */}
+              <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute top-10 left-0 text-3xl">📚</motion.div>
+              <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 3.5, repeat: Infinity }} className="absolute bottom-10 left-5 text-3xl">⭐</motion.div>
+              <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute top-20 right-0 text-3xl">🧠</motion.div>
+              <motion.div animate={{ y: [0, -14, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-5 right-10 text-3xl">🎓</motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -153,8 +186,14 @@ const LandingPage = () => {
       {/* CTA */}
       <section className="py-24">
         <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="glass-card-strong rounded-3xl p-12 text-center max-w-3xl mx-auto">
-            <GraduationCap className="w-12 h-12 mx-auto mb-4 text-primary" />
+          <motion.div {...fadeUp} className="glass-card-strong rounded-3xl p-12 text-center max-w-3xl mx-auto relative overflow-hidden">
+            <motion.img
+              src={foxyMascot}
+              alt=""
+              className="w-16 h-16 mx-auto mb-4"
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Learning?</h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
               Join thousands of students using AI to study smarter, not harder.
@@ -172,7 +211,7 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center gap-2 font-display text-lg font-bold mb-3">
-                <span>🧠</span> EduVision AI
+                <img src={foxyMascot} alt="Foxy" className="w-8 h-8" /> EduVision AI
               </div>
               <p className="text-muted-foreground text-sm mb-4">Empowering students with AI-powered personalized learning tools.</p>
               <div className="flex gap-3">
