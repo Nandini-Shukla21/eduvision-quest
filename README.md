@@ -1,73 +1,139 @@
-# Welcome to your Lovable project
+# EduVision AI 🚀
 
-## Project info
+**EduVision AI** is an AI-powered personalized learning and career guidance platform designed to help students learn more effectively based on their individual learning styles.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+The platform analyzes how a student learns best and adapts study materials, summaries, and recommendations accordingly. It also provides career guidance and performance analytics to help students improve continuously.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🌟 Problem Statement
 
-**Use Lovable**
+Students often struggle because traditional education systems provide the same learning method for everyone. However, each student has a unique learning style such as visual, auditory, or reading-based.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+EduVision AI solves this problem by using artificial intelligence to:
 
-Changes made via Lovable will be committed automatically to this repo.
+* Identify a student's learning style
+* Personalize study materials
+* Provide AI-generated summaries
+* Track learning progress
+* Offer career guidance based on performance
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 💡 Key Features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 🧠 Learning Style Detection
 
-Follow these steps:
+Uses AI to detect whether a student learns best through visual, reading, or interactive methods.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 📚 AI Study Material Summarization
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Students can upload notes or documents and receive AI-generated summaries for faster learning.
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 📊 Student Performance Dashboard
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+Tracks learning progress and provides analytics to identify strengths and weaknesses.
+
+### 🎓 Career Recommendation System
+
+Suggests suitable career paths based on student interests, skills, and performance.
+
+### 🤖 AI Chatbot – Foxy
+
+An intelligent chatbot that assists students with learning guidance, doubts, and study tips.
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+* React
+* Tailwind CSS
+
+### Backend
+
+* Node.js / Python (depending on implementation)
+
+### AI / ML
+
+* Machine Learning models for learning style detection
+* NLP for study material summarization
+
+### Deployment
+
+* Vercel (Frontend)
+
+---
+
+## 📂 Project Structure
+
+```
+EduVision-AI
+│
+├── frontend
+│   ├── components
+│   ├── pages
+│   └── assets
+│
+├── backend
+│   ├── api
+│   └── models
+│
+├── ai-model
+│   └── learning_style_model
+│
+└── README.md
+```
+
+---
+
+## 🚀 How to Run the Project
+
+### 1. Clone the Repository
+
+```
+git clone https://github.com/Rakhi8076/EduVision---AI.git
+```
+
+### 2. Navigate to the Project Folder
+
+```
+cd EduVision---AI
+```
+
+### 3. Install Dependencies
+
+```
+npm install
+```
+
+### 4. Start the Development Server
+
+```
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🎯 Future Improvements
 
-**Use GitHub Codespaces**
+* Advanced AI learning analytics
+* Integration with real educational content platforms
+* Personalized study plans
+* Mobile application
+* Voice-based AI tutor
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 🏆 Hackathon Project
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+EduVision AI was built as a hackathon project with the goal of improving the learning experience using artificial intelligence.
 
-## How can I deploy this project?
+Our mission is to make learning **smarter, more personalized, and accessible for every student.**
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+⭐ If you like this project, consider giving it a star!
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
