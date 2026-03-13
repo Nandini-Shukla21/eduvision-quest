@@ -96,13 +96,88 @@ const LandingPage = () => {
               transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
               className="relative flex justify-center"
             >
-              <motion.img
-                src={foxyMascot}
-                alt="Foxy - AI Learning Companion"
-                className="w-64 md:w-80 lg:w-96 drop-shadow-2xl"
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              />
+              {/* Foxy with waving, winking, studying animation sequence */}
+              <motion.div className="relative w-64 md:w-80 lg:w-96">
+                <motion.img
+                  src={foxyMascot}
+                  alt="Foxy - AI Learning Companion"
+                  className="w-full drop-shadow-2xl"
+                  animate={{
+                    y: [0, -15, 0, -5, 0],
+                    rotate: [0, -5, 5, -3, 0],
+                    scale: [1, 1.05, 1, 1.03, 1],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    times: [0, 0.2, 0.4, 0.7, 1],
+                  }}
+                />
+                {/* Waving hand emoji */}
+                <motion.div
+                  className="absolute top-2 right-4 text-4xl"
+                  animate={{
+                    rotate: [0, 20, -10, 20, -10, 0],
+                    opacity: [0, 1, 1, 1, 1, 0],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    times: [0, 0.1, 0.2, 0.3, 0.35, 0.4],
+                  }}
+                >
+                  👋
+                </motion.div>
+                {/* Winking eye */}
+                <motion.div
+                  className="absolute top-8 left-1/2 -translate-x-1/2 text-3xl"
+                  animate={{
+                    opacity: [0, 0, 1, 1, 0, 0],
+                    scale: [0.5, 0.5, 1, 1.2, 0.5, 0.5],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    times: [0, 0.4, 0.45, 0.55, 0.6, 1],
+                  }}
+                >
+                  😉
+                </motion.div>
+                {/* Studying book */}
+                <motion.div
+                  className="absolute bottom-4 left-4 text-3xl"
+                  animate={{
+                    opacity: [0, 0, 0, 1, 1, 0],
+                    y: [10, 10, 10, 0, -5, 10],
+                    rotate: [0, 0, 0, -10, 5, 0],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    times: [0, 0.5, 0.6, 0.7, 0.85, 1],
+                  }}
+                >
+                  📖
+                </motion.div>
+                {/* Sparkle effects during studying */}
+                <motion.div
+                  className="absolute top-0 left-8 text-2xl"
+                  animate={{
+                    opacity: [0, 0, 0, 0.8, 1, 0],
+                    scale: [0, 0, 0, 1, 1.3, 0],
+                    y: [0, 0, 0, -10, -20, -30],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    times: [0, 0.6, 0.65, 0.75, 0.85, 1],
+                  }}
+                >
+                  ✨
+                </motion.div>
+              </motion.div>
+
               {/* Speech bubble */}
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
