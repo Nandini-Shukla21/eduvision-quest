@@ -62,7 +62,7 @@ An intelligent chatbot that assists students with learning guidance, doubts, and
 
 ### Deployment
 
-* Vercel (Frontend)
+* Vercel 
 
 ---
 
