@@ -264,7 +264,7 @@ const LandingPage = () => {
             <div className="grid md:grid-cols-3 gap-8">
               <div>
                 <div className="flex items-center gap-2 font-display text-lg font-bold mb-3">
-                  <img src={foxyMascot} alt="Foxy" className="w-8 h-8" /> EduVision AI
+                  <img src={foxyMascot} alt="Foxy" className="w-12 h-12" /> EduVision AI
                 </div>
                 <p className="text-muted-foreground text-sm mb-4">Empowering students with AI-powered personalized learning tools.</p>
                 <div className="flex gap-3">
