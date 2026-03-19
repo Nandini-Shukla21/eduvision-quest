@@ -40,7 +40,7 @@ const FoxyLoader = ({ onComplete }: { onComplete: () => void }) => {
       <motion.img
         src={foxyMascot}
         alt="Loading"
-        className="w-24 h-24"
+        className="w-36 h-36"
         animate={{
           y: [0, -12, 0],
           rotate: [0, -8, 8, 0],

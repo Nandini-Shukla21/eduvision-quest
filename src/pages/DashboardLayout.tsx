@@ -31,7 +31,7 @@ const DashboardLayout = () => {
   const NavContent = () => (
     <div className="flex flex-col h-full">
       <div className="p-4 flex items-center gap-2">
-        <img src={foxyMascot} alt="Foxy" className="w-8 h-8 shrink-0" />
+        <img src={foxyMascot} alt="Foxy" className="w-12 h-12 shrink-0" />
         {!collapsed && <span className="font-display font-bold text-lg">EduVision AI</span>}
       </div>
 
