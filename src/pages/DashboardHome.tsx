@@ -63,7 +63,7 @@ const DashboardHome = () => {
         <motion.img
           src={foxyMascot}
           alt="Foxy"
-          className="w-14 h-14 shrink-0"
+          className="w-20 h-20 shrink-0"
           animate={{ y: [0, -4, 0] }}
           transition={{ duration: 2.5, repeat: Infinity }}
         />

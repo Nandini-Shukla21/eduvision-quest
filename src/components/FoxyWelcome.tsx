@@ -41,7 +41,7 @@ const FoxyWelcome = () => {
               <motion.img
                 src={foxyMascot}
                 alt="Foxy"
-                className="w-16 h-16 shrink-0"
+                className="w-20 h-20 shrink-0"
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
