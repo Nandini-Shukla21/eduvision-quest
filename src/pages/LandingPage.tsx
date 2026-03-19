@@ -243,7 +243,7 @@ const LandingPage = () => {
               <motion.img
                 src={foxyMascot}
                 alt=""
-                className="w-16 h-16 mx-auto mb-4"
+                className="w-24 h-24 mx-auto mb-4"
                 animate={{ rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
